@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
-import {View, Text, Image, StyleSheet} from 'react-native'
+/*import React, {useState} from 'react'
+import {View, Text, Image, StyleSheet, Alert} from 'react-native'
 import Logo from '../../../assets/MemoryCareLogo3.png'
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import FingerprintScanner from 'react-native-fingerprint-scanner';
+
 
 
 const SignInScreen = () => {
@@ -18,8 +20,26 @@ const onForgotPasswordPressed = () => {
     console.warn("Forgot password");
 }
 
-
-
+const authenticateWithFingerprint = () => {
+    FingerprintScanner.isSensorAvailable()
+      .then((biometryType) => {
+        if(biometryType === 'Touch ID' || biometryType === 'Face ID') {
+            FingerprintScanner.authenticate({
+                description: 'FINGERPRINT', 
+            })
+             .then(() => {
+                Alert.alert('Authentication GREAT SUCCESS', 'GWAN BAI');
+             })
+             .catch((error) => {
+                console.error('Fingerprint authentication failed:', error);
+                Alert.alert('Authentication failed', 'Please try again or use another authentication method.');
+             });
+        } else {
+            Alert.alert('Biometric sensor not available', 'Please use another authentication method.');
+        }
+      })
+       .catch((error) => console.error('nope',error));
+    };
 
     return (
     <View style={styles.root}>
@@ -52,7 +72,11 @@ const onForgotPasswordPressed = () => {
          type= "TERTIARY"
          />
 
-         
+        <CustomButton
+        text="Use Fingerprint" 
+        onPress={authenticateWithFingerprint} 
+        type="SECONDARY" 
+        /> 
     </View>
     );
 };
@@ -71,4 +95,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SignInScreen
+
+
+
+export default SignInScreen*/
