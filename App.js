@@ -5,14 +5,13 @@ import SignInScreen from './src/screens/SignInScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import MainContainer from './src/screens/MainContainer';
+import MainContainer from './src/MainContainer';
 
 
 
 
 const App = () => {
 
-  
   return (
     <MainContainer/>
   )
