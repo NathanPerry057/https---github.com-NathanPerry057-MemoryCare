@@ -36,10 +36,18 @@ export default function MainContainer(){
                 iconName = focused ? 'settings' : 'settings-outline';
             }
 
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color='purple' />;
+           
+            return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
+
+
+        tabBarOptions={{
+            activeTintColor: 'purple',
+            inactiveTintColor: 'black',
+            labelStyle: {paddingBottom: 5, fontSize: 13},
+            style: {padding: 5, height: 70}
+        }}
          >
             <Tab.Screen name={homeName} component={HomeScreen} />
             <Tab.Screen name={detailsName} component={DetailsScreen} />

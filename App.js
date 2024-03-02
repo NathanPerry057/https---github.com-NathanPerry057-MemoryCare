@@ -6,6 +6,8 @@ import HomeScreen from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainContainer from './src/MainContainer';
+import WelcomeScreen from './src/screens/SetupScreens/WelcomeScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 
@@ -13,7 +15,25 @@ import MainContainer from './src/MainContainer';
 const App = () => {
 
   return (
+    <NavigationContainer>
+      <Stack.Navigator
+      initialRouteName='WelcomeScreen'
+      >
+        <Stack.Screen 
+
+          name="WelcomeScreen"
+          component={WelcomeScreen}
+          options={{
+            headerShown:false}}
+        >
+        </Stack.Screen>
+      </Stack.Navigator>
+    
     <MainContainer/>
+
+
+
+    </NavigationContainer>
   )
 };
 
