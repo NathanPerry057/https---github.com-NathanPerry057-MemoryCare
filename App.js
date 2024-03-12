@@ -1,40 +1,24 @@
-
-
-import {StyleSheet, Text, View, TextInput, ScrollView, FlatList, SafeAreaView} from 'react-native';
-import SignInScreen from './src/screens/SignInScreen';
-import HomeScreen from './src/screens/HomeScreen';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainContainer from './src/MainContainer';
 import WelcomeScreen from './src/screens/SetupScreens/WelcomeScreen';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
-
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-
   return (
     <NavigationContainer>
-      <Stack.Navigator
-      initialRouteName='WelcomeScreen'
-      >
+      <Stack.Navigator initialRouteName='MainContainer'>
         <Stack.Screen 
-
-          name="WelcomeScreen"
-          component={WelcomeScreen}
-          options={{
-            headerShown:false}}
-        >
-        </Stack.Screen>
+          name="MainContainer"
+          component={MainContainer}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
-    
-    <MainContainer/>
-
-
-
     </NavigationContainer>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

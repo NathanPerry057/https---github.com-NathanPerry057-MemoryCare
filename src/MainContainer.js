@@ -19,8 +19,7 @@ const settingsName = 'Settings';
 const Tab = createBottomTabNavigator();
 
 export default function MainContainer(){
-    return(
-        <NavigationContainer>
+    return(   
             <Tab.Navigator
             initialRouteName={homeName}
             screenOptions={({ route }) => ({
@@ -53,7 +52,6 @@ export default function MainContainer(){
             <Tab.Screen name={detailsName} component={DetailsScreen} />
             <Tab.Screen name={settingsName} component={SettingsScreen} />
             </Tab.Navigator>
-
-        </NavigationContainer>
+   
     );
 }
