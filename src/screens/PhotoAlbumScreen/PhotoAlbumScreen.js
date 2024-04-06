@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Button, Alert } from 'react-native';
 import { Camera } from 'expo-camera';
+import CustomButton from '../../components/CustomButton/CustomButton';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const PhotoAlbumScreen = () => {
     const [cameraReady, setCameraReady] = useState(false);
     const [hasPermission, setHasPermission] = useState(null);
     const cameraRef = useRef(null);
-  
+    const navigation = useNavigation(); // Hook for navigation
+
     useEffect(() => {
       (async () => {
-        const { status } = await Camera.requestPermissionsAsync();
+        const { status } = await Camera.requestCameraPermissionsAsync();
         setHasPermission(status === 'granted');
       })();
     }, []);
@@ -19,8 +24,7 @@ const PhotoAlbumScreen = () => {
         try {
           const { uri } = await cameraRef.current.takePictureAsync();
           console.log('Image captured:', uri);
-          // Save image logic here
-          Alert.alert('Image captured!', `Image saved to: ${uri}`);
+          navigation.navigate('ImageViewScreen', { imageUri: uri }); // Navigate to ImageViewScreen with image URI
         } catch (error) {
           console.error('Failed to take picture:', error);
           Alert.alert('Error', 'Failed to take picture. Please try again.');
@@ -40,7 +44,8 @@ const PhotoAlbumScreen = () => {
             shadowOpacity: 2,
             shadowRadius: 10,
             elevation: 15, 
-        }}>
+            marginBottom: 20,
+          }}>
             <Camera
               ref={cameraRef}
               style={{ flex: 1 }}
@@ -48,7 +53,7 @@ const PhotoAlbumScreen = () => {
               onCameraReady={() => setCameraReady(true)}
             />
           </View>
-          <Button title="Take Picture" onPress={takePicture} disabled={!cameraReady} />
+          <CustomButton text="Take Picture" onPress={takePicture} disabled={!cameraReady} />
         </View>
       );
     };

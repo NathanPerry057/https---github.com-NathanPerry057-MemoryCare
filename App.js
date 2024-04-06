@@ -8,6 +8,9 @@ import MemoryGamesScreen from './src/screens/MemoryGamesScreen';
 import HomeScreen from './src/screens/HomeScreen/HomeScreen';
 import RelaxationHubScreen from './src/screens/RelaxationHubScreen';
 import PhotoAlbumScreen from './src/screens/PhotoAlbumScreen';
+import ImageViewScreen from './src/screens/ImageViewScreen';
+
+
 
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +43,10 @@ const App = () => {
           name="PhotoAlbum"
           component={PhotoAlbumScreen} // Add RelaxationHubScreen here
           options={{ title: 'Photo Album' }}
+        />
+        <Stack.Screen 
+        name="ImageViewScreen" 
+        component={ImageViewScreen} 
         />
         {/* Add other screens here */}
       </Stack.Navigator>
