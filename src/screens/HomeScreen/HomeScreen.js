@@ -1,22 +1,32 @@
 import * as React from 'react';
-import {View, Text, Button} from 'react-native';
+import { View, Text, Image } from 'react-native';
 import CustomButton from '../../components/CustomButton/CustomButton';
-
-export default function HomeScreen({navigation}) {
-    return(
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text
-                onPress={() => alert('This is the Home screen')}
-                style={{fontSize: 26, fontWeight: 'bold'}}>Home Screen</Text>
+import MemoryCareLogo from '../../../assets/MemoryCareLogo5.png';
 
 
-                <CustomButton>
-                    
-                </CustomButton>
+export default function HomeScreen({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            {/* Use imported image directly */}
+            <Image
+                source={MemoryCareLogo}
+                style={{ width: 300, height: 300, marginBottom: 40 }}
+            />
+                <CustomButton
+                 onPress={() => navigation.navigate('MemoryGames')}
+                 iconName="puzzle-piece"
+                 text="Memory Games"
+                />
 
-            </View>
+            <CustomButton onPress={() => navigation.navigate('RelaxationHub')}
+                iconName="camera"
+                 text="Relaxation hub"
+                />
 
-            
-            
+            <CustomButton onPress={() => navigation.navigate('PhotoAlbum')}
+                iconName="camera"
+                 text="Photo Album"
+                />
+        </View>
     );
 }
