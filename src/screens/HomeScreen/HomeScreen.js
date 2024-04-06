@@ -19,7 +19,7 @@ export default function HomeScreen({ navigation }) {
                 />
 
             <CustomButton onPress={() => navigation.navigate('RelaxationHub')}
-                iconName="camera"
+                iconName="moon-o"
                  text="Relaxation hub"
                 />
 
