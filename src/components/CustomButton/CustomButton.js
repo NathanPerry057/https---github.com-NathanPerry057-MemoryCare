@@ -8,7 +8,7 @@ const CustomButton = ({ onPress, children, iconName, text }) => {
     return (
         <Pressable onPress={onPress} style={styles.container}>
             <LinearGradient
-                colors={['#3A1C71', '#D76D77', '#FFAF7B']} // Use the same color for both start and end points
+                colors={['#3A1C71', '#D76D77', '#FFAF7B']} 
                 style={styles.gradient}>
                 {iconName && <Icon name={iconName} size={20} color="white" style={styles.icon} />}
                 <Text style={styles.text}>{text}</Text>
@@ -19,11 +19,11 @@ const CustomButton = ({ onPress, children, iconName, text }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: 300, // Set the fixed width of the button
+        width: 300, 
         borderRadius: 25,
-        overflow: 'hidden', // Ensure gradient doesn't overflow the button
+        overflow: 'hidden', 
         elevation: 5,
-        marginBottom: 10, // Add margin bottom to separate buttons
+        marginBottom: 10, 
     },
     gradient: {
         flexDirection: 'row',

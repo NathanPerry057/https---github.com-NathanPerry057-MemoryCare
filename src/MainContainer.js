@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
 import 'react-native-gesture-handler';
 
+
 //Screens
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen/DetailsScreen';

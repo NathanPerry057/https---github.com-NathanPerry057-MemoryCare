@@ -7,7 +7,7 @@ import MemoryCareLogo from '../../../assets/MemoryCareLogo5.png';
 export default function HomeScreen({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            {/* Use imported image directly */}
+            {}
             <Image
                 source={MemoryCareLogo}
                 style={{ width: 300, height: 300, marginBottom: 40 }}

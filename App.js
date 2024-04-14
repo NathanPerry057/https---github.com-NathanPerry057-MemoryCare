@@ -9,6 +9,7 @@ import HomeScreen from './src/screens/HomeScreen/HomeScreen';
 import RelaxationHubScreen from './src/screens/RelaxationHubScreen';
 import PhotoAlbumScreen from './src/screens/PhotoAlbumScreen';
 import ImageViewScreen from './src/screens/ImageViewScreen';
+import * as SQLite from 'expo-sqlite';
 
 
 
