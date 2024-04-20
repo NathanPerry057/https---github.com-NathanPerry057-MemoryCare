@@ -14,7 +14,7 @@ import SettingsScreen from './screens/SettingsScreen/SettingsScreen';
 
 // Screen names
 const homeName = 'Home';
-const detailsName = 'Details';
+const detailsName = 'Gallery';
 const settingsName = 'Settings';
 
 const Tab = createBottomTabNavigator();
@@ -31,7 +31,7 @@ export default function MainContainer(){
             if(rn === homeName) {
                 iconName = focused ? 'home' : 'home-outline';
             } else if (rn === detailsName) {
-                iconName = focused ? 'list' : 'list-outline';
+                iconName = focused ? 'image' : 'image-outline';
             } else if (rn === settingsName) {
                 iconName = focused ? 'settings' : 'settings-outline';
             }

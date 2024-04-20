@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Button, Alert, StyleSheet } from 'react-native';
+import { View, Button, Alert, StyleSheet, TextInput, Modal } from 'react-native';
 import { Camera } from 'expo-camera';
 import { db, initDatabase } from '../../database/database';
 import CustomButton from '../../components/CustomButton/CustomButton';
 
 const PhotoAlbumScreen = () => {
   const [cameraReady, setCameraReady] = useState(false);
-  const [hasPermission, setHasPermission] = useState(null); // Add state for camera permission
-  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back); // State to track camera type
-  const cameraRef = useRef(null); // Create a ref for the camera component
+  const [hasPermission, setHasPermission] = useState(null); 
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back); 
+  const cameraRef = useRef(null); 
 
   useEffect(() => {
     (async () => {

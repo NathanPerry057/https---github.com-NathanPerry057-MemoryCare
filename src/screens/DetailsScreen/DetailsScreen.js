@@ -1,12 +1,72 @@
-import * as React from 'react';
-import {View, Text} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { db } from '../../database/database';
 
-export default function DetailsScreen({navigation}) {
-    return(
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text
-                onPress={() => navigation.navigate('Home')}
-                style={{fontSize: 26, fontWeight: 'bold'}}>Details Screen</Text>
-            </View>
-    );
-}
+const DetailsScreen = ({ navigation }) => {
+  const [photos, setPhotos] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      fetchPhotos();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const fetchPhotos = () => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM photos;',
+        [],
+        (_, { rows }) => {
+          const data = [];
+          for (let i = 0; i < rows.length; i++) {
+            data.push(rows.item(i));
+          }
+          setPhotos(data);
+        }
+      );
+    });
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Your Gallery</Text>
+      <FlatList
+        data={photos}
+        renderItem={({ item }) => (
+          <View style={styles.photoContainer}>
+            <Image source={{ uri: item.uri }} style={styles.photo} />
+          </View>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  photoContainer: {
+    marginVertical: 10,
+  },
+  photo: {
+    width: 350,
+    height: 350,
+    resizeMode: 'cover',
+    borderRadius: 20,
+    shadowColor: 'black',
+    
+  },
+});
+
+export default DetailsScreen;
