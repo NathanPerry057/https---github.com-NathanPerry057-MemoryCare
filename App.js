@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,6 +10,7 @@ import RelaxationHubScreen from './src/screens/RelaxationHubScreen';
 import PhotoAlbumScreen from './src/screens/PhotoAlbumScreen';
 import ImageViewScreen from './src/screens/ImageViewScreen';
 import * as SQLite from 'expo-sqlite';
+import { initDatabase } from './src/database/database';
 
 
 
@@ -17,6 +18,11 @@ import * as SQLite from 'expo-sqlite';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+
+  useEffect(() => {
+    initDatabase();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='MainContainer'>

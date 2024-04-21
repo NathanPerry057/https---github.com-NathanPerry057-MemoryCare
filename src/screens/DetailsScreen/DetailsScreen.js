@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { db } from '../../database/database';
 
 const DetailsScreen = ({ navigation }) => {
@@ -24,26 +24,29 @@ const DetailsScreen = ({ navigation }) => {
             data.push(rows.item(i));
           }
           setPhotos(data);
+        },
+        (t, error) => {
+          console.log('Error fetching photos:', error);
         }
       );
     });
   };
 
-  
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.header}>Your Gallery</Text>
       </View>
       <FlatList
-        data={photos}
-        renderItem={({ item }) => (
-          <View style={styles.photoContainer}>
-            <Image source={{ uri: item.uri }} style={styles.photo} />
-          </View>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
+  data={photos}
+  renderItem={({ item }) => (
+    <View style={styles.photoContainer}>
+      <Image source={{ uri: item.uri }} style={styles.photo} />
+      <Text>{item.text ? item.text.toString() : "No description"}</Text>
+    </View>
+  )}
+  keyExtractor={(item, index) => index.toString()}
+/>
     </View>
   );
 };
@@ -66,7 +69,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-
   photoContainer: {
     marginVertical: 10,
   },
