@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Button, Alert, StyleSheet, TextInput, Modal, Text } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Modal, Alert } from 'react-native';
 import { Camera } from 'expo-camera';
 import { db, initDatabase } from '../../database/database';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import SmallCustomButton from '../../components/CustomButton/SmallCustomButton';
 
 const PhotoAlbumScreen = () => {
   const [cameraReady, setCameraReady] = useState(false);
@@ -40,7 +41,7 @@ const PhotoAlbumScreen = () => {
 
   const savePhotoToDatabase = () => {
     if (!photoUri || !photoText) {
-      Alert.alert('Error', 'Photo or description is missing.');
+      Alert.alert('Oops! No picture description.', 'Maybe tell us how your day is going :)');
       return;
     }
   
@@ -50,9 +51,9 @@ const PhotoAlbumScreen = () => {
         [photoUri, photoText],
         (_, result) => {
           if (result.rowsAffected > 0) {
-            Alert.alert('Success', 'Picture and text saved!');
+            Alert.alert('Amazing picture!', 'Go to the gallery if you want to view it :)');
           } else {
-            Alert.alert('Error', 'Failed to save the picture and text.');
+            Alert.alert('Uh oh', 'Something went wrong');
           }
         },
         (t, error) => {
@@ -75,6 +76,7 @@ const PhotoAlbumScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.headerText}>Take a picture! :) </Text> 
       <Modal
         animationType="slide"
         transparent={true}
@@ -87,12 +89,12 @@ const PhotoAlbumScreen = () => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <TextInput
-              placeholder="Enter a description for the photo"
+              placeholder="Great photo! How is your day going?"
               style={styles.textInput}
               onChangeText={text => setPhotoText(text)}
               value={photoText}
             />
-            <Button title="Save" onPress={savePhotoToDatabase} />
+            <SmallCustomButton text="Save" onPress={savePhotoToDatabase} />
           </View>
         </View>
       </Modal>
@@ -118,6 +120,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f0f0f0',
+  },
+  headerText: { // Style for the greeting text
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10, // Space above the camera view
   },
   cameraContainer: {
     width: 300,
@@ -151,18 +158,19 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 5,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
   },
   textInput: {
-    height: 40,
+    height: 50,
     width: 250,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 10,
+    borderRadius: 5,
   },
 });
 

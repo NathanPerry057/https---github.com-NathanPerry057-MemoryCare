@@ -49,7 +49,7 @@ const App = () => {
         <Stack.Screen 
           name="PhotoAlbum"
           component={PhotoAlbumScreen} // Add RelaxationHubScreen here
-          options={{ title: 'Photo Album' }}
+          options={{ title: 'Welcome to the photo album!' }}
         />
         <Stack.Screen 
         name="ImageViewScreen" 

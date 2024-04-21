@@ -83,12 +83,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 10,
-        borderBottomWidth: 1,
+        paddingVertical: 20,
+        borderBottomWidth: 2,
         borderBottomColor: '#ccc',
     },
     settingText: {
-        fontSize: 16,
+        fontSize: 18,
     },
 });
 

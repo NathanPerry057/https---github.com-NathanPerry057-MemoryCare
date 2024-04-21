@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { db } from '../../database/database';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 const DetailsScreen = ({ navigation }) => {
   const [photos, setPhotos] = useState([]);
@@ -38,15 +40,17 @@ const DetailsScreen = ({ navigation }) => {
         <Text style={styles.header}>Your Gallery</Text>
       </View>
       <FlatList
-  data={photos}
-  renderItem={({ item }) => (
-    <View style={styles.photoContainer}>
-      <Image source={{ uri: item.uri }} style={styles.photo} />
-      <Text>{item.text ? item.text.toString() : "No description"}</Text>
-    </View>
-  )}
-  keyExtractor={(item, index) => index.toString()}
-/>
+        data={photos}
+        renderItem={({ item }) => (
+          <View style={styles.photoContainer}>
+            <Image source={{ uri: item.uri }} style={styles.photo} />
+            <View style={styles.textBox}>
+              <Text style={styles.text}>{item.text ? item.text.toString() : "No description"}</Text>
+            </View>
+          </View>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 };
@@ -77,6 +81,19 @@ const styles = StyleSheet.create({
     height: 350,
     resizeMode: 'cover',
     borderRadius: 20,
+  },
+  textBox: {
+    backgroundColor: 'grey',
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 0, 
+    alignSelf: 'center',
+    maxWidth: '90%', 
+  },
+  text: {
+    fontSize: 18, // Larger text
+    color: 'white', // White text color
+    textAlign: 'center', // Center align text
   },
 });
 
