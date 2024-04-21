@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { db } from '../../database/database';
 
 const DetailsScreen = ({ navigation }) => {
@@ -29,9 +29,12 @@ const DetailsScreen = ({ navigation }) => {
     });
   };
 
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Your Gallery</Text>
+      <View style={styles.headerContainer}>
+        <Text style={styles.header}>Your Gallery</Text>
+      </View>
       <FlatList
         data={photos}
         renderItem={({ item }) => (
@@ -50,12 +53,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 20,
+  },
+  headerContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10,
   },
   header: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
   },
+
   photoContainer: {
     marginVertical: 10,
   },
@@ -64,8 +75,6 @@ const styles = StyleSheet.create({
     height: 350,
     resizeMode: 'cover',
     borderRadius: 20,
-    shadowColor: 'black',
-    
   },
 });
 
