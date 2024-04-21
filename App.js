@@ -11,6 +11,7 @@ import PhotoAlbumScreen from './src/screens/PhotoAlbumScreen';
 import ImageViewScreen from './src/screens/ImageViewScreen';
 import * as SQLite from 'expo-sqlite';
 import { initDatabase } from './src/database/database';
+import MeditationScreen from './src/screens/MeditationScreen';
 
 
 
@@ -54,6 +55,11 @@ const App = () => {
         <Stack.Screen 
         name="ImageViewScreen" 
         component={ImageViewScreen} 
+        />
+        <Stack.Screen 
+          name="Meditation"
+          component={MeditationScreen}
+          options={{ title: 'Meditation' }} // Optional: you can customize the header title here
         />
         {/* Add other screens here */}
       </Stack.Navigator>
