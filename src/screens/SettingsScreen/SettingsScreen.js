@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Switch, StyleSheet, Button, Alert } from 'react-native';
 import { db } from '../../database/database';
 import * as Notifications from 'expo-notifications';
-
+import { Picker } from '@react-native-picker/picker';
 
 
 const SettingsScreen = ({ navigation }) => {
     const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+    const [notificationInterval, setNotificationInterval] = useState('5');
 
     useEffect(() => {
         Notifications.setNotificationHandler({
@@ -23,6 +24,37 @@ const SettingsScreen = ({ navigation }) => {
     
         return () => subscription.remove();
     }, []);
+
+    const handleNotificationChange = async (itemValue) => {
+        setNotificationInterval(itemValue);
+        if (notificationsEnabled) {
+            await Notifications.cancelAllScheduledNotificationsAsync();
+            scheduleNotification(itemValue);
+        }
+    };
+
+    const scheduleNotification = async (interval) => {
+        const seconds = {
+            '5': 5, // 5 seconds
+            '3h': 10800, // 3 hours
+            '6h': 21600, // 6 hours
+            '9h': 32400, // 9 hours
+            '12h': 43200, // 12 hours
+            '24h': 86400, // 24 hours
+        };
+
+
+    await Notifications.scheduleNotificationAsync({
+        content: {
+            title: "Reminder!",
+            body: 'Remember to take a photo using the photo album!!',
+        },
+        trigger: {
+            seconds: seconds[interval],
+            repeats: true
+        },
+    });
+};
     
 
     const registerForPushNotificationsAsync = async () => {
@@ -44,18 +76,14 @@ const SettingsScreen = ({ navigation }) => {
         }
     };
 
+
     const toggleNotifications = async () => {
         const newState = !notificationsEnabled;
         setNotificationsEnabled(newState);
         if (newState) {
-            console.log('Notifications functional');
-            await Notifications.scheduleNotificationAsync({
-                content: {
-                    title: "Notifications Enabled!",
-                    body: 'You will now receive notifications.',
-                },
-                trigger: null, // triggers immediately
-            });
+            scheduleNotification(notificationInterval);
+        } else {
+            await Notifications.cancelAllScheduledNotificationsAsync();
         }
     };
 
@@ -107,11 +135,27 @@ const SettingsScreen = ({ navigation }) => {
                     value={notificationsEnabled}
                 />
             </View>
+            {notificationsEnabled && (
+                <View style={styles.settingItem}>
+                    <Text style={styles.settingText}>Notification Interval</Text>
+                    <Picker
+                        selectedValue={notificationInterval}
+                        style={{ height: 50, width: 150 }}
+                        onValueChange={(itemValue) => handleNotificationChange(itemValue)}>
+                        <Picker.Item label="5 Seconds" value="5" />
+                        <Picker.Item label="3 Hours" value="3h" />
+                        <Picker.Item label="6 Hours" value="6h" />
+                        <Picker.Item label="9 Hours" value="9h" />
+                        <Picker.Item label="12 Hours" value="12h" />
+                        <Picker.Item label="24 Hours" value="24h" />
+                    </Picker>
+                </View>
+            )}
             <View style={styles.settingItem}>
                 <Text style={styles.settingText}>Delete All Photos</Text>
                 <Button
                     title="Delete"
-                    onPress={confirmDeletion}
+                    onPress={() => confirmDeletion()}
                     color="red"
                 />
             </View>
