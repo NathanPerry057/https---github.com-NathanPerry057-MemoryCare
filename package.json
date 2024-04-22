@@ -34,7 +34,8 @@
     "react-native-webview": "^13.8.6",
     "react-native-youtube-iframe": "^2.3.0",
     "react-navigation-stack": "^2.10.4",
-    "expo-av": "~13.4.1"
+    "expo-av": "~13.4.1",
+    "expo-notifications": "~0.20.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
