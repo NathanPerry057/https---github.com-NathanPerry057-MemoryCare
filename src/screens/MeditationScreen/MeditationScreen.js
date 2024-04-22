@@ -25,7 +25,6 @@ export default function MeditationScreen() {
     }
 
     useEffect(() => {
-        // Unload sound when the component is unmounted
         return sound ? () => {
             sound.unloadAsync();
             setIsPlaying(false);

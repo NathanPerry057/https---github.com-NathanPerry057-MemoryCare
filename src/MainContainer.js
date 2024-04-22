@@ -43,7 +43,7 @@ export default function MainContainer(){
 
 
         tabBarOptions={{
-            activeTintColor: 'purple',
+            activeTintColor: '#7d7cf9',
             inactiveTintColor: 'black',
             labelStyle: {paddingBottom: 5, fontSize: 13},
             style: {padding: 5, height: 70}

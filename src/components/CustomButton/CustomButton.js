@@ -8,7 +8,7 @@ const CustomButton = ({ onPress, children, iconName, text }) => {
     return (
         <Pressable onPress={onPress} style={styles.container}>
             <LinearGradient
-                colors={['#3A1C71', '#D76D77', '#FFAF7B']} 
+                colors={['#0e1c26', '#7d7cf9', '#7d7cf9']} 
                 style={styles.gradient}>
                 {iconName && <Icon name={iconName} size={20} color="white" style={styles.icon} />}
                 <Text style={styles.text}>{text}</Text>
