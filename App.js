@@ -12,7 +12,7 @@ import ImageViewScreen from './src/screens/ImageViewScreen';
 import * as SQLite from 'expo-sqlite';
 import { initDatabase } from './src/database/database';
 import MeditationScreen from './src/screens/MeditationScreen';
-
+import FingerprintScreen from './src/screens/FingerprintAuthScreen/FingerprintScreen';
 
 
 
@@ -26,7 +26,12 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='MainContainer'>
+      <Stack.Navigator initialRouteName='FingerprintScreen'>  
+        <Stack.Screen 
+          name="FingerprintScreen"
+          component={FingerprintScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen 
           name="MainContainer"
           component={MainContainer}
@@ -35,21 +40,21 @@ const App = () => {
         <Stack.Screen 
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Home' }} // Optional: you can customize the header title here
+          options={{ title: 'Home' }}
         />
         <Stack.Screen 
           name="MemoryGames"
           component={MemoryGamesScreen}
-          options={{ title: 'Memory Games' }} // Optional: you can customize the header title here
+          options={{ title: 'Memory Games' }}
         />
         <Stack.Screen 
           name="RelaxationHub"
-          component={RelaxationHubScreen} // Add RelaxationHubScreen here
+          component={RelaxationHubScreen}
           options={{ title: 'Relaxation Hub' }}
         />
         <Stack.Screen 
           name="PhotoAlbum"
-          component={PhotoAlbumScreen} // Add RelaxationHubScreen here
+          component={PhotoAlbumScreen}
           options={{ title: 'Welcome to the photo album!' }}
         />
         <Stack.Screen 
@@ -59,7 +64,7 @@ const App = () => {
         <Stack.Screen 
           name="Meditation"
           component={MeditationScreen}
-          options={{ title: 'Meditation' }} // Optional: you can customize the header title here
+          options={{ title: 'Meditation' }}
         />
         {/* Add other screens here */}
       </Stack.Navigator>
