@@ -20,39 +20,32 @@ const settingsName = 'Settings';
 const Tab = createBottomTabNavigator();
 
 export default function MainContainer(){
-    return(   
-            <Tab.Navigator
-            initialRouteName={homeName}
-            screenOptions={({ route }) => ({
+    return (
+    <Tab.Navigator
+        initialRouteName={homeName}
+        screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            let rn = route.name;
-
-            if(rn === homeName) {
-                iconName = focused ? 'home' : 'home-outline';
-            } else if (rn === detailsName) {
-                iconName = focused ? 'image' : 'image-outline';
-            } else if (rn === settingsName) {
-                iconName = focused ? 'settings' : 'settings-outline';
+                let iconName;
+                if (route.name === homeName) {
+                    iconName = focused ? 'home' : 'home-outline';
+                 } else if (route.name === detailsName) {
+                    iconName = focused ? 'image' : 'image-outline';
+                 } else if (route.name === settingsName) {
+                    iconName = focused ? 'settings' : 'settings-outline';
+                }
+                return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: '#7d7cf9',
+                tabBarInactiveTintColor: 'black',
+                tabBarLabelStyle: { paddingBottom: 5, fontSize: 13 },
+                tabBarStyle: { padding: 5, height: 70 },
             }
-
-           
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-
-
-        tabBarOptions={{
-            activeTintColor: '#7d7cf9',
-            inactiveTintColor: 'black',
-            labelStyle: {paddingBottom: 5, fontSize: 13},
-            style: {padding: 5, height: 70}
-        }}
-         >
-            <Tab.Screen name={homeName} component={HomeScreen} />
-            <Tab.Screen name={detailsName} component={DetailsScreen} />
-            <Tab.Screen name={settingsName} component={SettingsScreen} />
-            </Tab.Navigator>
-   
+        )
+    }
+    >
+        <Tab.Screen name={homeName} component={HomeScreen} />
+        <Tab.Screen name={detailsName} component={DetailsScreen} />
+        <Tab.Screen name={settingsName} component={SettingsScreen} />
+        </Tab.Navigator>
     );
 }

@@ -14,7 +14,6 @@ export const initDatabase = () => {
           [],
           () => console.log('Column made'),
           (t, error) => {
-            // This will fail if the column already exists, so ignore if it's a specific "duplicate column" error
             if (error.message.includes('duplicate column name: text')) {
               console.log('Column already exists, all good!');
             } else {

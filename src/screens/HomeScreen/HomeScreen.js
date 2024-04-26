@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
     quoteText: {
         fontSize: 18,
         fontStyle: 'italic',
-        marginBottom: 20, // Add some spacing between the quote and the logo
-        textAlign: 'center', // Center-align text
-        paddingHorizontal: 30, // Provide some horizontal padding
+        marginBottom: 20, 
+        textAlign: 'center', 
+        paddingHorizontal: 30,
         fontWeight: 'bold',
     }
 });

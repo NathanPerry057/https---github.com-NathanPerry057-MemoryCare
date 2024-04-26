@@ -7,11 +7,11 @@ export default function RelaxationHubScreen() {
     const navigation = useNavigation();
 
     const goToMeditation = () => {
-        navigation.navigate('Meditation'); // Ensure the route name matches your navigation setup
+        navigation.navigate('Meditation'); 
     };
 
     const goToBreathingExercises = () => {
-        navigation.navigate('BreathingExercises'); // Ensure the route name matches your navigation setup
+        navigation.navigate('BreathingExercises'); 
     };
 
     return (
@@ -19,12 +19,12 @@ export default function RelaxationHubScreen() {
             <Text style={{ fontSize: 24, marginBottom: 20 }}>Choose a Relaxation Method</Text>
             <CustomButton 
                 onPress={goToMeditation} 
-                iconName="medkit" // Choose an icon that best represents meditation
+                iconName="medkit" 
                 text="Meditation"
             />
             <CustomButton 
                 onPress={goToBreathingExercises}
-                iconName="heartbeat" // Choose an icon that best represents breathing exercises
+                iconName="heartbeat" 
                 text="Breathing Exercises"
             />
         </View>

@@ -2,10 +2,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function MemoryGamesScreen() {
+export default function BreathingExercisesScreen() {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Memory Games Screen</Text>
+            <Text>YURT</Text>
             {}
         </View>
     );

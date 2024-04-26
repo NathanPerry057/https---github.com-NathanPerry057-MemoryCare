@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-const CustomButton = ({ onPress, children, iconName, text }) => {
+const CustomButton = ({ title, onPress, children, iconName, text }) => {
     return (
         <Pressable onPress={onPress} style={styles.container}>
             <LinearGradient
@@ -12,6 +12,7 @@ const CustomButton = ({ onPress, children, iconName, text }) => {
                 style={styles.gradient}>
                 {iconName && <Icon name={iconName} size={20} color="white" style={styles.icon} />}
                 <Text style={styles.text}>{text}</Text>
+                <Text style={styles.text}>{title}</Text>
             </LinearGradient>
         </Pressable>
     );

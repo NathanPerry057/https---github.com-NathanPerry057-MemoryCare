@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch'; // Make sure to install this package if not already installed
+import fetch from 'cross-fetch'; 
 
 export const notifyBackend = async (userId, authenticated) => {
     const response = await fetch('http://your-backend-url/api/auth-event', {
@@ -7,7 +7,7 @@ export const notifyBackend = async (userId, authenticated) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            userId, // Pass this dynamically from the calling component
+            userId, 
             authenticated,
         }),
     });

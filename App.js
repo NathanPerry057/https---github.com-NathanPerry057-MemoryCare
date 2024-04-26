@@ -13,6 +13,7 @@ import * as SQLite from 'expo-sqlite';
 import { initDatabase } from './src/database/database';
 import MeditationScreen from './src/screens/MeditationScreen';
 import FingerprintScreen from './src/screens/FingerprintAuthScreen/FingerprintScreen';
+import BreathingExercisesScreen from './src/screens/BreathingExercisesScreen';
 
 
 
@@ -66,7 +67,12 @@ const App = () => {
           component={MeditationScreen}
           options={{ title: 'Meditation' }}
         />
-        {/* Add other screens here */}
+        <Stack.Screen 
+          name="BreathingExercises"
+          component={BreathingExercisesScreen}
+          options={{ title: 'Meditation' }}
+        />
+        {}
       </Stack.Navigator>
     </NavigationContainer>
   );

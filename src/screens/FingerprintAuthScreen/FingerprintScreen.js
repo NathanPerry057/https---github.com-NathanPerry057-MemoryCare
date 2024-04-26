@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { View, Text, Button, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, Alert, Image, StyleSheet } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
+import CustomButton from '../../components/CustomButton/CustomButton';
+import MemoryCareLogo from '../../../assets/MemoryCareLogo5.png';
+import Ionicons from 'react-native-vector-icons/Ionicons'; 
 
 const FingerprintScreen = ({ navigation }) => {
-  useEffect(() => {
-    authenticate();
-  }, []);
 
   const authenticate = async () => {
     const hasHardware = await LocalAuthentication.hasHardwareAsync();
@@ -27,18 +27,50 @@ const FingerprintScreen = ({ navigation }) => {
     });
 
     if (result.success) {
-      navigation.navigate('MainContainer');  // Corrected screen name
+      navigation.navigate('MainContainer');
     } else {
       Alert.alert("Authentication failed", result.error);
     }
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Authenticate using your fingerprint</Text>
-      <Button title="Authenticate" onPress={authenticate} />
+    <View style={styles.container}>
+      <Text style={styles.welcomeText}>Welcome to MemoryCare</Text>
+      <Image
+        source={require('../../../assets/MemoryCareLogo5.png')} 
+        style={styles.welcomeImage}
+      />
+      <Text style={styles.instructions}>
+        Tap the button below to log in!
+      </Text>
+      <CustomButton title="Authenticate" onPress={authenticate} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  welcomeText: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 60,
+  },
+  instructions: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: 'gray',
+    marginBottom: 20,
+  },
+  welcomeImage: {
+    width: 300, 
+    height: 300, 
+    marginBottom: 20,
+  }
+});
 
 export default FingerprintScreen;

@@ -10,7 +10,7 @@ export default function MeditationScreen() {
     const [playbackStatus, setPlaybackStatus] = useState('stopped');
 
 
-    // Array of meditation tracks
+   
     const meditationTracks = [
         { id: 1, title: 'Calm Mind', uri: 'https://audiomeditation.s3.amazonaws.com/No CopyRight Meditation Music 528Hz - Royalty Free Healing Music.mp3' },
         { id: 2, title: 'Deep Relaxation', uri: 'https://audiomeditation.s3.amazonaws.com/5 Minute Meditation Music - with Earth Resonance Frequency for Deeper Relaxation.mp3' },
