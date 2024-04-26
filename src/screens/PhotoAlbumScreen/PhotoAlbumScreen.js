@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     marginBottom: 10, // Space above the camera view
   },
   cameraContainer: {
-    width: 300,
+    width: 350,
     height: 500,
     borderRadius: 15,
     overflow: 'hidden',

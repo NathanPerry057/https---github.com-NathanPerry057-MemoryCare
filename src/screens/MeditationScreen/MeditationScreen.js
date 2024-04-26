@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Audio } from 'expo-av';
+import CustomButton from '../../components/CustomButton/CustomButton';
+import meditation from '../../../assets/meditation.png';
 
 export default function MeditationScreen() {
     const [sound, setSound] = useState();
@@ -78,43 +80,50 @@ export default function MeditationScreen() {
     }, 
     [sound]);
 
-return (
-    <View style={styles.container}>
-        <Text style={styles.title}>Guided Meditation Tracks</Text>
-        {meditationTracks.map((track) => (
-            <TouchableOpacity
-                key={track.id}
-                style={[styles.button, playbackStatus !== 'stopped' ? styles.disabledButton : null]}
-                onPress={() => playSound(track.uri)}
-                disabled={playbackStatus !== 'stopped'}
-            >
-                <Text style={styles.buttonText}>{`Play ${track.title}`}</Text>
-            </TouchableOpacity>
-        ))}
-        {(playbackStatus === 'playing' || playbackStatus === 'paused') && (
-            <View>
-                {playbackStatus === 'playing' && (
-                    <TouchableOpacity style={styles.controlButton} onPress={pauseSound}>
-                        <Text style={styles.controlButtonText}>Pause</Text>
-                    </TouchableOpacity>
-                )}
-                {playbackStatus === 'paused' && (
-                    <TouchableOpacity style={styles.controlButton} onPress={resumeSound}>
-                        <Text style={styles.controlButtonText}>Unpause</Text>
-                    </TouchableOpacity>
-                )}
-                <TouchableOpacity style={styles.controlButton} onPress={stopSound}>
-                    <Text style={styles.controlButtonText}>Stop</Text>
-                </TouchableOpacity>
-                <Text style={styles.timerText}>
-                    {playbackPosition !== null && playbackDuration !== null ?
-                        `${formatTime(playbackPosition)} / ${formatTime(playbackDuration)}` :
-                        "0:00 / 0:00"}
-                </Text>
-            </View>
-        )}
-    </View>
-);
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Guided Meditation Tracks</Text>
+            <Image source={meditation} style={styles.meditationImage} />
+            {meditationTracks.map((track) => (
+                <CustomButton
+                    key={track.id}
+                    style={[styles.button, playbackStatus !== 'stopped' ? styles.disabledButton : null]}
+                    onPress={() => playSound(track.uri)}
+                    disabled={playbackStatus !== 'stopped'}
+                    title={`Play ${track.title}`}
+                />
+            ))}
+            {(playbackStatus === 'playing' || playbackStatus === 'paused') && (
+                <View>
+                    {playbackStatus === 'playing' && (
+                        <CustomButton
+                            style={styles.controlButton}
+                            onPress={pauseSound}
+                            title="Pause"
+                        />
+                    )}
+                    {playbackStatus === 'paused' && (
+                        <CustomButton
+                            style={styles.controlButton}
+                            onPress={resumeSound}
+                            title="Unpause"
+                        />
+                    )}
+                    <CustomButton
+                        style={styles.controlButton}
+                        onPress={stopSound}
+                        title="Stop"
+                    />
+                    <Text style={styles.timerText}>
+                        {playbackPosition !== null && playbackDuration !== null ?
+                            `${formatTime(playbackPosition)} / ${formatTime(playbackDuration)}` :
+                            "0:00 / 0:00"}
+                    </Text>
+                </View>
+            )}
+        </View>
+    );
+    
 }
 
 const styles = StyleSheet.create({
@@ -126,7 +135,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        marginBottom: 20,
+        marginBottom: 0,
         fontWeight: 'bold',
     },
     button: {
@@ -136,6 +145,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         minWidth: 400,
         alignItems: 'center',
+    },
+    meditationImage: {
+        width: 250,  
+        height: 250, 
+        marginBottom: 20,
     },
     buttonText: {
         color: 'white',

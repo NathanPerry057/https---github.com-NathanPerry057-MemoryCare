@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   photo: {
     width: 350,
-    height: 350,
+    height: 500,
     resizeMode: 'cover',
     borderRadius: 20,
   },
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
     maxWidth: '90%', 
   },
   text: {
-    fontSize: 18, // Larger text
-    color: 'white', // White text color
-    textAlign: 'center', // Center align text
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center', 
   },
 });
 

@@ -70,7 +70,7 @@ const App = () => {
         <Stack.Screen 
           name="BreathingExercises"
           component={BreathingExercisesScreen}
-          options={{ title: 'Meditation' }}
+          options={{ title: 'Breathing Exercise' }}
         />
         {}
       </Stack.Navigator>

@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch'; 
 
 export const notifyBackend = async (userId, authenticated) => {
-    const response = await fetch('http://your-backend-url/api/auth-event', {
+    const response = await fetch('', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
