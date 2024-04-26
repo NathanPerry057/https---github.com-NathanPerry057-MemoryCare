@@ -16,7 +16,7 @@ export default function RelaxationHubScreen() {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-            <Text style={{ fontSize: 24, marginBottom: 20 }}>Choose a Relaxation Method</Text>
+            <Text style={{ fontSize: 24, marginBottom: 100, fontWeight: 'bold' }}>Choose a Relaxation Method</Text>
             <CustomButton 
                 onPress={goToMeditation} 
                 iconName="medkit" 

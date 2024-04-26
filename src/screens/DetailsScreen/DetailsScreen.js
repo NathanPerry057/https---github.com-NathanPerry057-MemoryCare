@@ -37,7 +37,7 @@ const DetailsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>Your Gallery</Text>
+        <Text style={styles.header}>Gallery</Text>
       </View>
       <FlatList
         data={photos}

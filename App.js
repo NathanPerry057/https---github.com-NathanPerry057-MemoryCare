@@ -46,21 +46,17 @@ const App = () => {
         <Stack.Screen 
           name="MemoryGames"
           component={MemoryGamesScreen}
-          options={{ title: 'Memory Games' }}
+          options={{ title: 'Welcome to the memory game!' }}
         />
         <Stack.Screen 
           name="RelaxationHub"
           component={RelaxationHubScreen}
-          options={{ title: 'Relaxation Hub' }}
+          options={{ title: 'Welcome to the relaxation Hub!' }}
         />
         <Stack.Screen 
           name="PhotoAlbum"
           component={PhotoAlbumScreen}
           options={{ title: 'Welcome to the photo album!' }}
-        />
-        <Stack.Screen 
-        name="ImageViewScreen" 
-        component={ImageViewScreen} 
         />
         <Stack.Screen 
           name="Meditation"

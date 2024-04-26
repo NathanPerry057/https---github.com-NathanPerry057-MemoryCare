@@ -1,12 +1,116 @@
-
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
+import { db } from '../../database/database';
+import { shuffleArray } from '../ShuffleArray/shuffleArray';
 
 export default function MemoryGamesScreen() {
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [textOptions, setTextOptions] = useState([]);
+    const [matches, setMatches] = useState(0);
+
+    useEffect(() => {
+        fetchItems();
+    }, []);
+
+    const fetchItems = () => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'SELECT * FROM photos;',
+                [],
+                (_, { rows }) => {
+                    const data = [];
+                    for (let i = 0; i < rows.length; i++) {
+                        data.push(rows.item(i));
+                    }
+                    const shuffledData = shuffleArray(data);
+                    setSelectedImage(shuffledData[0]); 
+                    setTextOptions(shuffleArray(shuffledData.slice(0, 3).map(item => item.text))); 
+                },
+                (t, error) => {
+                    console.log('Error fetching photos:', error);
+                }
+            );
+        });
+    };
+
+    const handleSelectText = (text) => {
+        if (selectedImage.text === text) {
+            Alert.alert("Match!", "Good job!");
+            setMatches(matches + 1);
+            fetchItems(); 
+        } else {
+            Alert.alert("Wrong match", "Try again!");
+        }
+    };
+
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Memory Games Screen</Text>
-            {}
+        <View style={styles.container}>
+            <Text style={styles.header}>Memory Game</Text>
+            <Text style={styles.subheader}>Matches found: {matches}</Text>
+            {selectedImage && <Image source={{ uri: selectedImage.uri }} style={styles.image} />}
+            <View style={styles.optionsContainer}>
+                {textOptions.map((text, index) => (
+                    <TouchableOpacity key={index} style={styles.option} onPress={() => handleSelectText(text)}>
+                        <Text style={styles.optionText}>{text}</Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f9f9f9',  
+        padding: 20,
+    },
+    header: {
+        fontSize: 26,
+        fontWeight: 'bold',
+        color: '#2C3E50', 
+        marginBottom: 20,
+    },
+    subheader: {
+        fontSize: 18,
+        color: '#7f8c8d',  
+        marginBottom: 20,
+    },
+    image: {
+        width: 300,
+        height: 300,
+        borderRadius: 10,  
+        resizeMode: 'cover',
+        marginBottom: 30,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    optionsContainer: {
+        flexDirection: 'column',
+        alignSelf: 'stretch',  
+        paddingHorizontal: 20,
+    },
+    option: {
+        padding: 15,
+        marginVertical: 10,
+        backgroundColor: '#ECF0F1',  
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation: 4,
+    },
+    optionText: {
+        fontSize: 20,
+        textAlign: 'center',
+        color: '#34495E',  
+    },
+});
