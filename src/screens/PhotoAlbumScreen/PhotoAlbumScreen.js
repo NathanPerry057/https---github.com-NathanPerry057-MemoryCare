@@ -31,7 +31,7 @@ const PhotoAlbumScreen = () => {
       try {
         const photo = await cameraRef.current.takePictureAsync();
         setPhotoUri(photo.uri);
-        setModalVisible(true); // Show the modal after taking a picture
+        setModalVisible(true); 
       } catch (error) {
         console.error('Failed to take picture:', error);
         Alert.alert('Error', 'Failed to take picture. Please try again.');
@@ -121,10 +121,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#f0f0f0',
   },
-  headerText: { // Style for the greeting text
+  headerText: { 
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10, // Space above the camera view
+    marginBottom: 10, 
   },
   cameraContainer: {
     width: 350,

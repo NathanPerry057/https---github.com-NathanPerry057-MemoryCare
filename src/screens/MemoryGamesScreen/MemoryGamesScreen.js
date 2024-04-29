@@ -33,15 +33,23 @@ export default function MemoryGamesScreen() {
         });
     };
 
+
+    
+
     const handleSelectText = (text) => {
-        if (selectedImage.text === text) {
-            Alert.alert("Match!", "Good job!");
-            setMatches(matches + 1);
-            fetchItems(); 
+    if (selectedImage.text === text) {
+        const newMatches = matches + 1;
+        setMatches(newMatches);
+        if (newMatches % 5 === 0) {
+            Alert.alert("Well done!", `You've found ${newMatches} matches! Keep going!`);
         } else {
-            Alert.alert("Wrong match", "Try again!");
+            Alert.alert("Match!", "Good job!");
         }
-    };
+        fetchItems();
+    } else {
+        Alert.alert("Wrong match", "Try again!");
+    }
+};
 
     return (
         <View style={styles.container}>
@@ -98,7 +106,7 @@ const styles = StyleSheet.create({
     option: {
         padding: 15,
         marginVertical: 10,
-        backgroundColor: '#ECF0F1',  
+        backgroundColor: 'grey',  
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
@@ -106,11 +114,10 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
-        elevation: 4,
     },
     optionText: {
         fontSize: 20,
         textAlign: 'center',
-        color: '#34495E',  
+        color: 'white',  
     },
 });

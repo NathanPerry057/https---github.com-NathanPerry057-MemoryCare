@@ -20,6 +20,8 @@ const onForgotPasswordPressed = () => {
     console.warn("Forgot password");
 }
 
+
+
 const authenticateWithFingerprint = () => {
     FingerprintScanner.isSensorAvailable()
       .then((biometryType) => {
