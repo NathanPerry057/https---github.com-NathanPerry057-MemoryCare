@@ -8,15 +8,18 @@ export default function BreathingExercisesScreen() {
     const [isExercising, setIsExercising] = useState(false);
     const [timer, setTimer] = useState(null);
     const [countdown, setCountdown] = useState(8);
-    const [breathPhase, setBreathPhase] = useState('');
+
+    const [breathPhase, setBreathPhase] = useState(''); //Text state for breathe in and out
 
     useEffect(() => {
         if (isExercising) {
             setBreathPhase('Breathe In');
             const interval = setInterval(() => {
                 Vibration.vibrate();
+                
                 setCountdown(8);
                 setBreathPhase(prevPhase => prevPhase === 'Breathe In' ? 'Breathe Out' : 'Breathe In');
+                //Vibration interval
             }, 8000);
             setTimer(interval);
             const countdownInterval = setInterval(() => {

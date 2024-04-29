@@ -7,7 +7,8 @@ import { Picker } from '@react-native-picker/picker';
 
 const SettingsScreen = ({ navigation }) => {
     const [notificationsEnabled, setNotificationsEnabled] = useState(false);
-    const [notificationInterval, setNotificationInterval] = useState('5');
+    const [notificationInterval, setNotificationInterval] = useState('5'); //Stores user interval
+
 
     useEffect(() => {
         Notifications.setNotificationHandler({
@@ -25,6 +26,7 @@ const SettingsScreen = ({ navigation }) => {
         return () => subscription.remove();
     }, []);
 
+    //Updates sate and changes notications interval when user has changed them
     const handleNotificationChange = async (itemValue) => {
         setNotificationInterval(itemValue);
         if (notificationsEnabled) {
@@ -57,26 +59,9 @@ const SettingsScreen = ({ navigation }) => {
 };
     
 
-    const registerForPushNotificationsAsync = async () => {
-        const { status: existingStatus } = await Notifications.getPermissionsAsync();
-        console.log("Current Permission Status:", existingStatus);
-        
-        let finalStatus = existingStatus;
-        if (existingStatus !== 'granted') {
-            const { status } = await Notifications.requestPermissionsAsync();
-            finalStatus = status;
-            console.log("New Permission Status:", finalStatus);
-        }
-        
-        if (finalStatus === 'granted') {
-            const tokenData = await Notifications.getExpoPushTokenAsync();
-            console.log("Expo Push Token:", tokenData.data);
-        } else {
-            Alert.alert('Failed to get push token for push notification!');
-        }
-    };
+    
 
-
+    
     const toggleNotifications = async () => {
         const newState = !notificationsEnabled;
         setNotificationsEnabled(newState);
@@ -87,6 +72,8 @@ const SettingsScreen = ({ navigation }) => {
         }
     };
 
+
+    //Confrimation warning alert
     const confirmDeletion = () => {
         Alert.alert(
             "Confirm Deletion",
@@ -104,6 +91,8 @@ const SettingsScreen = ({ navigation }) => {
         );
     };
 
+
+    
     const deleteAllPhotos = () => {
         db.transaction(tx => {
             tx.executeSql(

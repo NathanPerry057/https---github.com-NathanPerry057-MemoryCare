@@ -1,3 +1,10 @@
+/*_             
+|\ |  _. _|_ |_   _. ._    |_) _  ._ ._   
+| \| (_|  |_ | | (_| | |   |  (/_ |  | \/ 
+                                       /
+*/  
+
+
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,7 +24,7 @@ import BreathingExercisesScreen from './src/screens/BreathingExercisesScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-
+  //Initializes db on startup
   useEffect(() => {
     initDatabase();
   }, []);

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { db } from '../../database/database';
-import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 const DetailsScreen = ({ navigation }) => {
   const [photos, setPhotos] = useState([]);
 
+  //Event listener triggers when screen is in focus and calls fetchPhotos
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      fetchPhotos();
+      fetchPhotos(); 
     });
 
     return unsubscribe;
@@ -18,6 +19,7 @@ const DetailsScreen = ({ navigation }) => {
   const fetchPhotos = () => {
     db.transaction(tx => {
       tx.executeSql(
+
         'SELECT * FROM photos;',
         [],
         (_, { rows }) => {
@@ -37,19 +39,20 @@ const DetailsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>Gallery</Text>
+        <Text style={styles.header}>Welcome!</Text>
       </View>
+      
       <FlatList
         data={photos}
         renderItem={({ item }) => (
           <View style={styles.photoContainer}>
             <Image source={{ uri: item.uri }} style={styles.photo} />
             <View style={styles.textBox}>
-              <Text style={styles.text}>{item.text ? item.text.toString() : "No description"}</Text>
+              <Text style={styles.text}>{item.text ? item.text.toString() : "No description found :( please "}</Text>
             </View>
           </View>
         )}
-        keyExtractor={(item, index) => index.toString()}
+        
       />
     </View>
   );
@@ -62,6 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 20,
   },
+
   headerContainer: {
     width: '100%',
     flexDirection: 'row',

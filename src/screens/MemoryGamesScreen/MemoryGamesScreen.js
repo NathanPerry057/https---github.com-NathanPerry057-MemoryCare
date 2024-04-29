@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Vibration, StyleSheet, Alert } from 'react-native';
 import { db } from '../../database/database';
 import { shuffleArray } from '../ShuffleArray/shuffleArray';
 
@@ -12,18 +12,23 @@ export default function MemoryGamesScreen() {
         fetchItems();
     }, []);
 
+
     const fetchItems = () => {
         db.transaction(tx => {
             tx.executeSql(
+                //Fetches rows from table
                 'SELECT * FROM photos;',
+                //Param for sql query
                 [],
                 (_, { rows }) => {
                     const data = [];
                     for (let i = 0; i < rows.length; i++) {
                         data.push(rows.item(i));
                     }
+                    //Shufflearray.js is called to randomize the order of photos
                     const shuffledData = shuffleArray(data);
                     setSelectedImage(shuffledData[0]); 
+                    //Shuffles first three items of shuffled data
                     setTextOptions(shuffleArray(shuffledData.slice(0, 3).map(item => item.text))); 
                 },
                 (t, error) => {
@@ -34,20 +39,24 @@ export default function MemoryGamesScreen() {
     };
 
 
-    
+
 
     const handleSelectText = (text) => {
+    //Checks if text matches selectedimage
     if (selectedImage.text === text) {
         const newMatches = matches + 1;
         setMatches(newMatches);
         if (newMatches % 5 === 0) {
             Alert.alert("Well done!", `You've found ${newMatches} matches! Keep going!`);
+            Vibration.vibrate();
         } else {
             Alert.alert("Match!", "Good job!");
+            Vibration.vibrate();
         }
         fetchItems();
     } else {
         Alert.alert("Wrong match", "Try again!");
+        Vibration.vibrate();
     }
 };
 
@@ -96,7 +105,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5,
     },
     optionsContainer: {
         flexDirection: 'column',

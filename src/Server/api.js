@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch'; 
+/*import fetch from 'cross-fetch'; 
 
 export const notifyBackend = async (userId, authenticated) => {
     const response = await fetch('', {
@@ -16,3 +16,4 @@ export const notifyBackend = async (userId, authenticated) => {
     console.log(data);
     return data;
 };
+*/

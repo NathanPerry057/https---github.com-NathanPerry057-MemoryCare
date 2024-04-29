@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TextInput, Modal, Alert } from 'react-native';
+import { View, Text, StyleSheet, Vibration, TextInput, Modal, Alert } from 'react-native';
 import { Camera } from 'expo-camera';
 import { db, initDatabase } from '../../database/database';
 import CustomButton from '../../components/CustomButton/CustomButton';
@@ -23,15 +23,18 @@ const PhotoAlbumScreen = () => {
   }, []);
 
   const takePicture = async () => {
+    //Camera peremission
     if (!hasPermission) {
       Alert.alert('Error', 'Camera permission not granted.');
       return;
     }
     if (cameraRef.current) {
       try {
+
         const photo = await cameraRef.current.takePictureAsync();
-        setPhotoUri(photo.uri);
-        setModalVisible(true); 
+        setPhotoUri(photo.uri); //Captures uri
+        setModalVisible(true); //Displays modal prompt
+        Vibration.vibrate();
       } catch (error) {
         console.error('Failed to take picture:', error);
         Alert.alert('Error', 'Failed to take picture. Please try again.');
@@ -44,16 +47,18 @@ const PhotoAlbumScreen = () => {
       Alert.alert('Oops! No picture description.', 'Maybe tell us how your day is going :)');
       return;
     }
-  
+    
     db.transaction(tx => {
       tx.executeSql(
+        //Placeholders for photo and text
         'INSERT INTO photos (uri, text) VALUES (?, ?);',
         [photoUri, photoText],
         (_, result) => {
+          //Checks if inserted into database
           if (result.rowsAffected > 0) {
             Alert.alert('Amazing picture!', 'Go to the gallery if you want to view it :)');
           } else {
-            Alert.alert('Uh oh', 'Something went wrong');
+            Alert.alert('Oh no', 'Something went wrong');
           }
         },
         (t, error) => {
@@ -62,6 +67,7 @@ const PhotoAlbumScreen = () => {
         }
       );
     });
+    //Closes modal and resets photoText
     setModalVisible(false);
     setPhotoText('');
   };
@@ -108,7 +114,7 @@ const PhotoAlbumScreen = () => {
       </View>
       <View style={styles.buttonContainer}>
         <CustomButton text="Take Picture" onPress={takePicture} disabled={!cameraReady} />
-        <CustomButton text="Toggle Camera" iconName="camera" onPress={toggleCameraType} />
+        <CustomButton text="Switch Camera" iconName="camera" onPress={toggleCameraType} />
       </View>
     </View>
   );

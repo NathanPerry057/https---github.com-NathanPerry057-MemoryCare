@@ -9,6 +9,7 @@ const FingerprintScreen = ({ navigation }) => {
 
   const authenticate = async () => {
     const hasHardware = await LocalAuthentication.hasHardwareAsync();
+    //Checks for biometric hardware
     if (!hasHardware) {
       Alert.alert("Error", "Your device doesn't support biometric authentication.");
       return;
@@ -16,6 +17,7 @@ const FingerprintScreen = ({ navigation }) => {
 
     const isEnrolled = await LocalAuthentication.isEnrolledAsync();
     if (!isEnrolled) {
+      //Checks if user have emrolled biometric data
       Alert.alert("Error", "No biometrics are set up on this device.");
       return;
     }
@@ -23,13 +25,12 @@ const FingerprintScreen = ({ navigation }) => {
     const result = await LocalAuthentication.authenticateAsync({
       promptMessage: "Authenticate",
       cancelLabel: "Cancel",
-      fallbackLabel: "Use Passcode",
     });
 
     if (result.success) {
       navigation.navigate('MainContainer');
     } else {
-      Alert.alert("Authentication failed", result.error);
+      Alert.alert("Authenticate to get started!");
     }
   };
 

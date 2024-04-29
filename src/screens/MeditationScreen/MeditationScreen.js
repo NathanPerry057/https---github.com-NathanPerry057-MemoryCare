@@ -20,11 +20,12 @@ export default function MeditationScreen() {
     ];
 
     async function playSound(uri) {
+        //Loads and plays audio tracks from the uri 
         const { sound } = await Audio.Sound.createAsync(
             { uri },
             { shouldPlay: true },
-            updateScreenForSoundStatus
-        );
+            updateScreenForSoundStatus 
+        ); 
         setSound(sound);
         setPlaybackStatus('playing');
         await sound.playAsync();
@@ -49,6 +50,7 @@ export default function MeditationScreen() {
         if (sound) {
             await sound.playAsync();
             setPlaybackStatus('playing');
+            //updates playback status
         }
     };
     
@@ -70,6 +72,7 @@ export default function MeditationScreen() {
         {formatTime(playbackPosition)} / {formatTime(playbackDuration)}
     </Text>
 
+    //Manages resource cleanup for the audio when the the sound object changes state and ensures no memory leaks
     useEffect(() => {
         return sound ? () => {
             sound.unloadAsync();
